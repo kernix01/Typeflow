@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0d11">
+  <title>Typeflow - тренажёр печати</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="product-identity">
+        <a class="brand" href="#" aria-label="Typeflow, главная">
+          <span class="brand-mark" aria-hidden="true">TF</span>
+          <span class="brand-name">Typeflow</span>
+        </a>
+        <span class="product-description">Тренажёр скорости печати</span>
+      </div>
+
+      <div class="header-tools">
+        <div class="control-cluster" aria-label="Настройки тренировки">
+          <label class="language-control" for="language">
+            <span>Язык</span>
+            <select id="language" name="language">
+              <option value="ru">Русский</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+
+          <label class="language-control" for="mode">
+            <span>Режим</span>
+            <select id="mode" name="mode">
+              <option value="words">Слова</option>
+              <option value="texts">Тексты</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="header-status" aria-label="Статус тренировки">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="statusText">Тренировка готова</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-main">
+        <p class="eyebrow">Печатай в своём ритме</p>
+        <h1 id="page-title">
+          <span>Печатай точно.</span>
+          <span><strong>Скорость</strong> придёт следом.</span>
+        </h1>
+        <p class="intro-copy">Начни вводить текст, чтобы запустить таймер.</p>
+      </div>
+
+      <div class="keyline" aria-hidden="true">
+        <span>A</span><span>S</span><span>D</span><span>F</span>
+        <i></i>
+        <span>J</span><span>K</span><span>L</span><span>;</span>
+      </div>
+    </section>
+
+    <div class="workspace">
+      <section class="training" aria-labelledby="training-title">
+        <div class="training-heading">
+          <div>
+            <p class="section-label">Текущая попытка</p>
+            <h2 id="training-title">Основной текст</h2>
+          </div>
+          <span class="attempt-badge">Попытка 1</span>
+        </div>
+
+        <p class="typing-text" id="typingText" aria-label="Текст для печати">
+          Хорошая скорость появляется не тогда, когда ты торопишься, а когда пальцы уверенно находят нужные клавиши. Сохраняй ровный ритм, замечай ошибки и продолжай печатать без лишнего напряжения.
+        </p>
+
+        <div class="progress" aria-label="Прогресс текста">
+          <div class="progress-meta">
+            <span>Прогресс</span>
+            <span><strong id="typedCharacters">0</strong> / <span id="totalCharacters">191</span></span>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <span class="progress-value"></span>
+          </div>
+        </div>
+
+        <label class="input-label" for="typingInput">Поле ввода</label>
+        <textarea
+          id="typingInput"
+          name="typingInput"
+          rows="4"
+          placeholder="Начни печатать здесь..."
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+        ></textarea>
+
+        <div class="training-actions">
+          <button class="button button-secondary" id="resetButton" type="button">
+            <span aria-hidden="true">↻</span>
+            <span>Начать заново</span>
+          </button>
+          <button class="button button-primary" id="nextTextButton" type="button">
+            <span>Новый текст</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="Статистика тренировки">
+        <div class="stats" aria-label="Статистика печати">
+          <div class="stat-item">
+            <span class="stat-label">Скорость</span>
+            <strong><span id="speedValue">0</span> <small>слов/мин</small></strong>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Точность</span>
+            <strong id="accuracyValue">100%</strong>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Ошибки</span>
+            <strong id="mistakesValue">0</strong>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Время</span>
+            <strong id="timeValue">00:00</strong>
+          </div>
+        </div>
+
+        <section class="result-panel" aria-labelledby="best-result-title">
+          <div class="result-heading">
+            <div>
+              <p class="section-label">Личный рекорд</p>
+              <h2 id="best-result-title">Лучший результат</h2>
+            </div>
+            <span class="result-arrow" aria-hidden="true">›</span>
+          </div>
+          <div class="best-result">
+            <strong id="bestSpeedValue">0</strong>
+            <span>слов в минуту</span>
+          </div>
+          <p>Заверши первую попытку, чтобы сохранить результат.</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
